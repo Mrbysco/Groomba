@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+issueTrackerURL="https://github.com/Mrbysco/Groomba/issues"
+license="MIT"
+
+[[mods]]
+modId="groomba"
+version="${file.jarVersion}"
+displayName="Groomba"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/groomba"
+authors="Mrbysco"
+description='''
+Groomba adds a Roomba like robot that will cut your grass
+'''
+[[dependencies.groomba]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20,1.21)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.groomba]]
+modId="forge"
+mandatory=true
+versionRange="[47.1.0,)"
+ordering="NONE"
+side="BOTH"
