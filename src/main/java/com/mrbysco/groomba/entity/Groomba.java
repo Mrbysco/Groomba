@@ -50,7 +50,8 @@ public class Groomba extends PathfinderMob {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.FOLLOW_RANGE, 35.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.23F);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D)
+				.add(Attributes.FOLLOW_RANGE, 35.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.25F);
 	}
 
 	@Nullable
