@@ -8,6 +8,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.world.phys.Vec3;
 
 public class GroombaModel extends HierarchicalModel<Groomba> {
 	private final ModelPart root;
@@ -51,7 +52,16 @@ public class GroombaModel extends HierarchicalModel<Groomba> {
 
 	@Override
 	public void setupAnim(Groomba groomba, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+		Vec3 delta = groomba.getDeltaMovement();
+		if (delta.x() != 0 || delta.z() != 0) {
+			this.wheel1.xRot = ageInTicks * 0.75F;
+			this.wheel2.xRot = ageInTicks * 0.75F;
+			this.wheel3.xRot = ageInTicks * 0.75F;
+		} else {
+			this.wheel1.xRot = 0;
+			this.wheel2.xRot = 0;
+			this.wheel3.xRot = 0;
+		}
 	}
 
 	@Override
