@@ -60,18 +60,17 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_iron_ingot",
       "has_planks",
       "has_cobble",
       "has_redstone",
-      "has_shears",
-      "has_the_recipe"
+      "has_shears"
     ]
   ],
   "rewards": {
     "recipes": [
       "groomba:groomba"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

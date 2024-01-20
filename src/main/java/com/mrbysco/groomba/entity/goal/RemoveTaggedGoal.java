@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
 
 public class RemoveTaggedGoal extends MoveInsideBlockGoal {
@@ -34,7 +35,7 @@ public class RemoveTaggedGoal extends MoveInsideBlockGoal {
 	}
 
 	public boolean canUse() {
-		if (!net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.removerMob.level(), this.removerMob)) {
+		if (!EventHooks.getMobGriefingEvent(this.removerMob.level(), this.removerMob)) {
 			return false;
 		} else if (this.nextStartTick > 0) {
 			--this.nextStartTick;

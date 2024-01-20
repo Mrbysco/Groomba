@@ -4,8 +4,8 @@ import com.mrbysco.groomba.GroombaMod;
 import com.mrbysco.groomba.registry.GroombaRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class GroombaItemModelProvider extends ItemModelProvider {
 	public GroombaItemModelProvider(PackOutput packOutput, ExistingFileHelper helper) {

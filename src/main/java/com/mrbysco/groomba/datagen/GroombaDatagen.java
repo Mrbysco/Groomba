@@ -9,10 +9,10 @@ import com.mrbysco.groomba.datagen.server.GroombaRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -26,7 +26,7 @@ public class GroombaDatagen {
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
 		if (event.includeServer()) {
-			generator.addProvider(true, new GroombaRecipeProvider(packOutput));
+			generator.addProvider(true, new GroombaRecipeProvider(packOutput, event.getLookupProvider()));
 			generator.addProvider(true, new GroombaLootProvider(packOutput));
 			generator.addProvider(true, new GroombaBlockTagProvider(packOutput, lookupProvider, helper));
 		}

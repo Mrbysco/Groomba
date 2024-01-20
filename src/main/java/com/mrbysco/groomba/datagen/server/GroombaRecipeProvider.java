@@ -1,23 +1,24 @@
 package com.mrbysco.groomba.datagen.server;
 
 import com.mrbysco.groomba.registry.GroombaRegistry;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 public class GroombaRecipeProvider extends RecipeProvider {
-	public GroombaRecipeProvider(PackOutput packOutput) {
-		super(packOutput);
+	public GroombaRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(packOutput, lookupProvider);
 	}
 
 	@Override
-	protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+	protected void buildRecipes(RecipeOutput recipeOutput) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GroombaRegistry.GROOMBA_ITEM.get())
 				.pattern("III")
 				.pattern("WCW")
@@ -32,6 +33,6 @@ public class GroombaRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_cobble", has(Tags.Items.COBBLESTONE))
 				.unlockedBy("has_redstone", has(Tags.Items.DUSTS_REDSTONE))
 				.unlockedBy("has_shears", has(Tags.Items.SHEARS))
-				.save(consumer);
+				.save(recipeOutput);
 	}
 }

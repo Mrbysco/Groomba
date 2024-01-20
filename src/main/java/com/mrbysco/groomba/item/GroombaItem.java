@@ -14,7 +14,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.HitResult.Type;
-import net.minecraftforge.common.util.FakePlayer;
+import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class GroombaItem extends Item {
 	public GroombaItem(Properties properties) {
@@ -25,7 +26,7 @@ public class GroombaItem extends Item {
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		HitResult hitResult = getPlayerPOVHitResult(level, player, Fluid.NONE);
-		InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onBucketUse(player, level, stack, hitResult);
+		InteractionResultHolder<ItemStack> ret = EventHooks.onBucketUse(player, level, stack, hitResult);
 		if (ret != null) return ret;
 
 		if (hitResult == null) {

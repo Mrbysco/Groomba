@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -42,7 +42,7 @@ public class GroombaLootProvider extends LootTableProvider {
 
 		@Override
 		protected Stream<EntityType<?>> getKnownEntityTypes() {
-			return GroombaRegistry.ENTITY_TYPES.getEntries().stream().map(RegistryObject::get);
+			return GroombaRegistry.ENTITY_TYPES.getEntries().stream().map(DeferredHolder::get);
 		}
 	}
 

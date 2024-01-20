@@ -4,8 +4,8 @@ import com.mrbysco.groomba.GroombaMod;
 import com.mrbysco.groomba.registry.GroombaRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class GroombaLanguageProvider extends LanguageProvider {
 	public GroombaLanguageProvider(PackOutput packOutput) {
@@ -27,7 +27,7 @@ public class GroombaLanguageProvider extends LanguageProvider {
 	 * @param sound The sound event registry object
 	 * @param text  The subtitle text
 	 */
-	private void addSubtitle(RegistryObject<SoundEvent> sound, String text) {
+	private void addSubtitle(DeferredHolder<SoundEvent, SoundEvent> sound, String text) {
 		this.addSubtitle(sound.get(), text);
 	}
 
