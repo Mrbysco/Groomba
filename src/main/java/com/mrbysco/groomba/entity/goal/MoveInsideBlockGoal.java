@@ -60,7 +60,7 @@ public abstract class MoveInsideBlockGoal extends Goal {
 	}
 
 	protected void moveMobToBlock() {
-		this.mob.getNavigation().moveTo((double)((float)this.blockPos.getX()) + 0.5D, (double)(this.blockPos.getY() + 1), (double)((float)this.blockPos.getZ()) + 0.5D, this.speedModifier);
+		this.mob.getNavigation().moveTo((double) ((float) this.blockPos.getX()) + 0.5D, (double) (this.blockPos.getY() + 1), (double) ((float) this.blockPos.getZ()) + 0.5D, this.speedModifier);
 	}
 
 	public double acceptedDistance() {
@@ -81,7 +81,7 @@ public abstract class MoveInsideBlockGoal extends Goal {
 			this.reachedTarget = false;
 			++this.tryTicks;
 			if (this.shouldRecalculatePath()) {
-				this.mob.getNavigation().moveTo((double)((float)blockpos.getX()) + 0.5D, (double)blockpos.getY(), (double)((float)blockpos.getZ()) + 0.5D, this.speedModifier);
+				this.mob.getNavigation().moveTo((double) ((float) blockpos.getX()) + 0.5D, (double) blockpos.getY(), (double) ((float) blockpos.getZ()) + 0.5D, this.speedModifier);
 			}
 		} else {
 			this.reachedTarget = true;
@@ -104,10 +104,10 @@ public abstract class MoveInsideBlockGoal extends Goal {
 		BlockPos blockpos = this.mob.blockPosition();
 		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-		for(int k = this.verticalSearchStart; k <= j; k = k > 0 ? -k : 1 - k) {
-			for(int l = 0; l < i; ++l) {
-				for(int i1 = 0; i1 <= l; i1 = i1 > 0 ? -i1 : 1 - i1) {
-					for(int j1 = i1 < l && i1 > -l ? l : 0; j1 <= l; j1 = j1 > 0 ? -j1 : 1 - j1) {
+		for (int k = this.verticalSearchStart; k <= j; k = k > 0 ? -k : 1 - k) {
+			for (int l = 0; l < i; ++l) {
+				for (int i1 = 0; i1 <= l; i1 = i1 > 0 ? -i1 : 1 - i1) {
+					for (int j1 = i1 < l && i1 > -l ? l : 0; j1 <= l; j1 = j1 > 0 ? -j1 : 1 - j1) {
 						blockpos$mutableblockpos.setWithOffset(blockpos, i1, k - 1, j1);
 						if (this.mob.isWithinRestriction(blockpos$mutableblockpos) && this.isValidTarget(this.mob.level(), blockpos$mutableblockpos)) {
 							this.blockPos = blockpos$mutableblockpos;

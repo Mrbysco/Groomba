@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class GroombaBlockTagProvider extends BlockTagsProvider {
 	public GroombaBlockTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider,
-								   ExistingFileHelper existingFileHelper) {
+	                               ExistingFileHelper existingFileHelper) {
 		super(packOutput, lookupProvider, GroombaMod.MOD_ID, existingFileHelper);
 	}
 

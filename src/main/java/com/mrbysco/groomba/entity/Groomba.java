@@ -37,9 +37,10 @@ public class Groomba extends PathfinderMob {
 		super(type, level);
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(OWNER_UNIQUE_ID, Optional.empty());
+	@Override
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(OWNER_UNIQUE_ID, Optional.empty());
 	}
 
 	@Override

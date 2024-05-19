@@ -25,14 +25,14 @@ public class GroombaRecipeProvider extends RecipeProvider {
 				.pattern("RSR")
 				.define('I', Tags.Items.INGOTS_IRON)
 				.define('W', ItemTags.PLANKS)
-				.define('C', Tags.Items.COBBLESTONE)
+				.define('C', Tags.Items.COBBLESTONES)
 				.define('R', Tags.Items.DUSTS_REDSTONE)
-				.define('S', Tags.Items.SHEARS)
+				.define('S', Tags.Items.TOOLS_SHEARS)
 				.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
 				.unlockedBy("has_planks", has(ItemTags.PLANKS))
-				.unlockedBy("has_cobble", has(Tags.Items.COBBLESTONE))
+				.unlockedBy("has_cobble", has(Tags.Items.COBBLESTONES))
 				.unlockedBy("has_redstone", has(Tags.Items.DUSTS_REDSTONE))
-				.unlockedBy("has_shears", has(Tags.Items.SHEARS))
+				.unlockedBy("has_shears", has(Tags.Items.TOOLS_SHEARS))
 				.save(recipeOutput);
 	}
 }

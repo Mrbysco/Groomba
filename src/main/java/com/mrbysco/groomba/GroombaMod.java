@@ -8,9 +8,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import org.slf4j.Logger;
 
@@ -21,7 +21,7 @@ public class GroombaMod {
 
 	public static TagKey<Block> CUTTABLE = BlockTags.create(new ResourceLocation(MOD_ID, "cuttable"));
 
-	public GroombaMod(IEventBus eventBus) {
+	public GroombaMod(IEventBus eventBus, Dist dist) {
 		GroombaRegistry.ITEMS.register(eventBus);
 		GroombaRegistry.ENTITY_TYPES.register(eventBus);
 		GroombaRegistry.SOUND_EVENTS.register(eventBus);
@@ -29,7 +29,7 @@ public class GroombaMod {
 		eventBus.addListener(GroombaRegistry::registerEntityAttributes);
 		eventBus.addListener(this::addTabContents);
 
-		if (FMLEnvironment.dist.isClient()) {
+		if (dist.isClient()) {
 			eventBus.addListener(ClientHandler::registerEntityRenders);
 			eventBus.addListener(ClientHandler::registerLayerDefinitions);
 		}

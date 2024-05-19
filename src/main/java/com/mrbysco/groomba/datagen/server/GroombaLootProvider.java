@@ -1,10 +1,12 @@
 package com.mrbysco.groomba.datagen.server;
 
 import com.mrbysco.groomba.registry.GroombaRegistry;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.WritableRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -15,19 +17,18 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 public class GroombaLootProvider extends LootTableProvider {
-	public GroombaLootProvider(PackOutput packOutput) {
-		super(packOutput, Set.of(), List.of(new SubProviderEntry(PaperEntityLoot::new, LootContextParamSets.ENTITY)));
+	public GroombaLootProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(packOutput, Set.of(), List.of(new SubProviderEntry(GroombaEntityLoot::new, LootContextParamSets.ENTITY)), lookupProvider);
 	}
 
-	private static class PaperEntityLoot extends EntityLootSubProvider {
-		protected PaperEntityLoot() {
+	private static class GroombaEntityLoot extends EntityLootSubProvider {
+		protected GroombaEntityLoot() {
 			super(FeatureFlags.REGISTRY.allFlags());
 		}
 
@@ -47,7 +48,7 @@ public class GroombaLootProvider extends LootTableProvider {
 	}
 
 	@Override
-	protected void validate(Map<ResourceLocation, LootTable> map, @Nonnull ValidationContext context) {
-
+	protected void validate(WritableRegistry<LootTable> writableregistry, ValidationContext validationcontext, ProblemReporter.Collector problemreporter$collector) {
+		super.validate(writableregistry, validationcontext, problemreporter$collector);
 	}
 }
