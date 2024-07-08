@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 public class GroombaRenderer extends MobRenderer<Groomba, GroombaModel> {
-	private static final ResourceLocation PADORU_TEXTURES = new ResourceLocation(GroombaMod.MOD_ID, "textures/entity/groomba.png");
+	private static final ResourceLocation PADORU_TEXTURES = ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "textures/entity/groomba.png");
 
 	public GroombaRenderer(EntityRendererProvider.Context context) {
 		super(context, new GroombaModel(context.bakeLayer(ClientHandler.GROOMBA)), 0.5F);

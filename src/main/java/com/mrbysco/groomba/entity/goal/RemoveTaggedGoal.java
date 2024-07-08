@@ -35,7 +35,7 @@ public class RemoveTaggedGoal extends MoveInsideBlockGoal {
 	}
 
 	public boolean canUse() {
-		if (!EventHooks.getMobGriefingEvent(this.removerMob.level(), this.removerMob)) {
+		if (!EventHooks.canEntityGrief(this.removerMob.level(), this.removerMob)) {
 			return false;
 		} else if (this.nextStartTick > 0) {
 			--this.nextStartTick;

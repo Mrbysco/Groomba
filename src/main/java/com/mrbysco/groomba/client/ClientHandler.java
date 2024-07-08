@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 public class ClientHandler {
-	public static final ModelLayerLocation GROOMBA = new ModelLayerLocation(new ResourceLocation(GroombaMod.MOD_ID, "groomba"), "main");
+	public static final ModelLayerLocation GROOMBA = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "groomba"), "main");
 
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(GroombaRegistry.GROOMBA.get(), GroombaRenderer::new);

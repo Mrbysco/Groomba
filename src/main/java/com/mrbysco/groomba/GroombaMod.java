@@ -19,7 +19,7 @@ public class GroombaMod {
 	public static final String MOD_ID = "groomba";
 	private static final Logger LOGGER = LogUtils.getLogger();
 
-	public static TagKey<Block> CUTTABLE = BlockTags.create(new ResourceLocation(MOD_ID, "cuttable"));
+	public static TagKey<Block> CUTTABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(MOD_ID, "cuttable"));
 
 	public GroombaMod(IEventBus eventBus, Dist dist) {
 		GroombaRegistry.ITEMS.register(eventBus);

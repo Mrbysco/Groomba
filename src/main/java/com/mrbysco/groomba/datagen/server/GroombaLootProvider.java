@@ -28,8 +28,8 @@ public class GroombaLootProvider extends LootTableProvider {
 	}
 
 	private static class GroombaEntityLoot extends EntityLootSubProvider {
-		protected GroombaEntityLoot() {
-			super(FeatureFlags.REGISTRY.allFlags());
+		protected GroombaEntityLoot(HolderLookup.Provider provider) {
+			super(FeatureFlags.REGISTRY.allFlags(), provider);
 		}
 
 		@Override

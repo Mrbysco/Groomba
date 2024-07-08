@@ -25,6 +25,6 @@ public class GroombaSoundProvider extends SoundDefinitionsProvider {
 	}
 
 	private ResourceLocation modLoc(String name) {
-		return new ResourceLocation(GroombaMod.MOD_ID, name);
+		return ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, name);
 	}
 }

@@ -23,13 +23,13 @@ public class GroombaRegistry {
 
 	public static final Supplier<EntityType<Groomba>> GROOMBA = ENTITY_TYPES.register("groomba", () ->
 			EntityType.Builder.<Groomba>of(Groomba::new, MobCategory.CREATURE)
-					.sized(0.99F, 0.99F).clientTrackingRange(10).build("groomba"));
+					.sized(0.95F, 0.95F).clientTrackingRange(10).build("groomba"));
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> GROOMBA_CUTTING = SOUND_EVENTS.register("groomba.cutting", () ->
-			SoundEvent.createVariableRangeEvent(new ResourceLocation(GroombaMod.MOD_ID, "groomba.cutting")));
+			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "groomba.cutting")));
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> GROOMBA_CUTTING2 = SOUND_EVENTS.register("groomba.cutting2", () ->
-			SoundEvent.createVariableRangeEvent(new ResourceLocation(GroombaMod.MOD_ID, "groomba.cutting2")));
+			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "groomba.cutting2")));
 
 	public static final DeferredItem<GroombaItem> GROOMBA_ITEM = ITEMS.register("groomba", () -> new GroombaItem(new Item.Properties()));
 

@@ -19,7 +19,7 @@ public class GroombaItemModelProvider extends ItemModelProvider {
 	}
 
 	private void generatedItem(ResourceLocation location) {
-		singleTexture(location.getPath(), new ResourceLocation("item/generated"),
-				"layer0", new ResourceLocation(GroombaMod.MOD_ID, "item/" + location.getPath()));
+		singleTexture(location.getPath(), ResourceLocation.withDefaultNamespace("item/generated"),
+				"layer0", ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "item/" + location.getPath()));
 	}
 }
