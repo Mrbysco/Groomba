@@ -31,7 +31,7 @@ public class GroombaRegistry {
 	public static final DeferredHolder<SoundEvent, SoundEvent> GROOMBA_CUTTING2 = SOUND_EVENTS.register("groomba.cutting2", () ->
 			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "groomba.cutting2")));
 
-	public static final DeferredItem<GroombaItem> GROOMBA_ITEM = ITEMS.register("groomba", () -> new GroombaItem(new Item.Properties()));
+	public static final DeferredItem<GroombaItem> GROOMBA_ITEM = ITEMS.registerItem("groomba", GroombaItem::new);
 
 	public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
 		event.put(GROOMBA.get(), Groomba.createAttributes().build());
