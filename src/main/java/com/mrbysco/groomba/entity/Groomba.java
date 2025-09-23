@@ -4,7 +4,6 @@ import com.mrbysco.groomba.GroombaMod;
 import com.mrbysco.groomba.entity.goal.RemoveTaggedGoal;
 import com.mrbysco.groomba.registry.GroombaRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -24,6 +23,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -67,20 +68,20 @@ public class Groomba extends PathfinderMob {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
+	public void addAdditionalSaveData(ValueOutput output) {
+		super.addAdditionalSaveData(output);
 
 		EntityReference<LivingEntity> entityreference = this.getOwnerReference();
 		if (entityreference != null) {
-			entityreference.store(compound, "Owner");
+			entityreference.store(output, "Owner");
 		}
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
+	public void readAdditionalSaveData(ValueInput input) {
+		super.readAdditionalSaveData(input);
 
-		EntityReference<LivingEntity> entityreference = EntityReference.readWithOldOwnerConversion(compound, "Owner", this.level());
+		EntityReference<LivingEntity> entityreference = EntityReference.readWithOldOwnerConversion(input, "Owner", this.level());
 		if (entityreference != null) {
 			this.entityData.set(OWNER_REFERENCE, Optional.of(entityreference));
 		} else {
