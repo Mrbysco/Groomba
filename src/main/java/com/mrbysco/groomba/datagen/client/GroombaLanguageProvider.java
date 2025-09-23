@@ -38,7 +38,7 @@ public class GroombaLanguageProvider extends LanguageProvider {
 	 * @param text  The subtitle text
 	 */
 	private void addSubtitle(SoundEvent sound, String text) {
-		String path = GroombaMod.MOD_ID + ".subtitle." + sound.getLocation().getPath();
+		String path = GroombaMod.MOD_ID + ".subtitle." + sound.location().getPath();
 		this.add(path, text);
 	}
 }

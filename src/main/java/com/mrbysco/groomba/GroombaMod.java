@@ -23,7 +23,7 @@ public class GroombaMod {
 
 	public GroombaMod(IEventBus eventBus, Dist dist) {
 		GroombaRegistry.ITEMS.register(eventBus);
-		GroombaRegistry.ENTITY_TYPES.register(eventBus);
+		GroombaRegistry.ENTITIES.register(eventBus);
 		GroombaRegistry.SOUND_EVENTS.register(eventBus);
 
 		eventBus.addListener(GroombaRegistry::registerEntityAttributes);

@@ -1,7 +1,7 @@
 package com.mrbysco.groomba.client.model;
 
-import com.mrbysco.groomba.entity.Groomba;
-import net.minecraft.client.model.HierarchicalModel;
+import com.mrbysco.groomba.client.state.GroombaRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -10,12 +10,11 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.phys.Vec3;
 
-public class GroombaModel extends HierarchicalModel<Groomba> {
-	private final ModelPart root;
+public class GroombaModel extends EntityModel<GroombaRenderState> {
 	private final ModelPart wheel1, wheel2, wheel3;
 
 	public GroombaModel(ModelPart root) {
-		this.root = root;
+		super(root);
 		ModelPart wheels = root.getChild("wheels");
 		this.wheel1 = wheels.getChild("wheel1");
 		this.wheel2 = wheels.getChild("wheel2");
@@ -51,21 +50,17 @@ public class GroombaModel extends HierarchicalModel<Groomba> {
 	}
 
 	@Override
-	public void setupAnim(Groomba groomba, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		Vec3 delta = groomba.getDeltaMovement();
+	public void setupAnim(GroombaRenderState renderState) {
+		super.setupAnim(renderState);
+		Vec3 delta = renderState.deltaMovement;
 		if (delta.x() != 0 || delta.z() != 0) {
-			this.wheel1.xRot = ageInTicks * 0.75F;
-			this.wheel2.xRot = ageInTicks * 0.75F;
-			this.wheel3.xRot = ageInTicks * 0.75F;
+			this.wheel1.xRot = renderState.ageInTicks * 0.75F;
+			this.wheel2.xRot = renderState.ageInTicks * 0.75F;
+			this.wheel3.xRot = renderState.ageInTicks * 0.75F;
 		} else {
 			this.wheel1.xRot = 0;
 			this.wheel2.xRot = 0;
 			this.wheel3.xRot = 0;
 		}
-	}
-
-	@Override
-	public ModelPart root() {
-		return this.root;
 	}
 }

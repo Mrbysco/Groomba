@@ -43,7 +43,7 @@ public class GroombaLootProvider extends LootTableProvider {
 
 		@Override
 		protected Stream<EntityType<?>> getKnownEntityTypes() {
-			return GroombaRegistry.ENTITY_TYPES.getEntries().stream().map(DeferredHolder::get);
+			return GroombaRegistry.ENTITIES.getEntries().stream().map(DeferredHolder::get);
 		}
 	}
 

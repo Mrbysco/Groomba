@@ -18,12 +18,16 @@ import java.util.function.Supplier;
 
 public class GroombaRegistry {
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(GroombaMod.MOD_ID);
-	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, GroombaMod.MOD_ID);
+	public static final DeferredRegister.Entities ENTITIES = DeferredRegister.createEntities(GroombaMod.MOD_ID);
 	public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, GroombaMod.MOD_ID);
 
-	public static final Supplier<EntityType<Groomba>> GROOMBA = ENTITY_TYPES.register("groomba", () ->
-			EntityType.Builder.<Groomba>of(Groomba::new, MobCategory.CREATURE)
-					.sized(0.95F, 0.95F).clientTrackingRange(10).build("groomba"));
+	public static final Supplier<EntityType<Groomba>> GROOMBA = ENTITIES.registerEntityType("groomba",
+			Groomba::new,
+			MobCategory.CREATURE,
+			builder -> builder
+					.sized(0.95F, 0.95F)
+					.clientTrackingRange(10)
+	);
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> GROOMBA_CUTTING = SOUND_EVENTS.register("groomba.cutting", () ->
 			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "groomba.cutting")));

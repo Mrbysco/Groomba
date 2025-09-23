@@ -4,13 +4,12 @@ import com.mrbysco.groomba.GroombaMod;
 import com.mrbysco.groomba.registry.GroombaRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class GroombaSoundProvider extends SoundDefinitionsProvider {
 
-	public GroombaSoundProvider(PackOutput packOutput, ExistingFileHelper helper) {
-		super(packOutput, GroombaMod.MOD_ID, helper);
+	public GroombaSoundProvider(PackOutput packOutput) {
+		super(packOutput, GroombaMod.MOD_ID);
 	}
 
 	@Override

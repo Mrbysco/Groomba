@@ -5,7 +5,7 @@ import com.mrbysco.groomba.registry.GroombaRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,17 +22,17 @@ public class GroombaItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		HitResult hitResult = getPlayerPOVHitResult(level, player, Fluid.NONE);
 		if (hitResult == null) {
-			return new InteractionResultHolder<>(InteractionResult.PASS, stack);
+			return InteractionResult.PASS;
 		} else if (hitResult.getType() != Type.BLOCK) {
-			return new InteractionResultHolder<>(InteractionResult.PASS, stack);
+			return InteractionResult.PASS;
 		} else {
 			BlockHitResult blockTraceResult = (BlockHitResult) hitResult;
 			BlockPos blockpos = blockTraceResult.getBlockPos();
-			Groomba groomba = GroombaRegistry.GROOMBA.get().create(level);
+			Groomba groomba = GroombaRegistry.GROOMBA.get().create(level, EntitySpawnReason.SPAWN_ITEM_USE);
 			if (groomba != null) {
 				groomba.teleportTo(blockpos.getX() + 0.5D, blockpos.getY() + 1, blockpos.getZ() + 0.5D);
 				if (!(player instanceof FakePlayer)) {
@@ -44,7 +44,7 @@ public class GroombaItem extends Item {
 			if (!player.isCreative()) {
 				stack.shrink(1);
 			}
-			return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
+			return InteractionResult.SUCCESS;
 		}
 	}
 }
