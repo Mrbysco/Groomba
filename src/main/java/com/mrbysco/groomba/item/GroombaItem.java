@@ -36,7 +36,7 @@ public class GroombaItem extends Item {
 			if (groomba != null) {
 				groomba.teleportTo(blockpos.getX() + 0.5D, blockpos.getY() + 1, blockpos.getZ() + 0.5D);
 				if (!(player instanceof FakePlayer)) {
-					groomba.setOwnerId(player.getUUID());
+					groomba.setOwner(player);
 				}
 				level.addFreshEntity(groomba);
 			}

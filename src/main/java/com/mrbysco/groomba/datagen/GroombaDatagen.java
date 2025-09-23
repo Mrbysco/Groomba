@@ -1,7 +1,7 @@
 package com.mrbysco.groomba.datagen;
 
-import com.mrbysco.groomba.datagen.client.GroombaModelProvider;
 import com.mrbysco.groomba.datagen.client.GroombaLanguageProvider;
+import com.mrbysco.groomba.datagen.client.GroombaModelProvider;
 import com.mrbysco.groomba.datagen.client.GroombaSoundProvider;
 import com.mrbysco.groomba.datagen.server.GroombaBlockTagProvider;
 import com.mrbysco.groomba.datagen.server.GroombaLootProvider;

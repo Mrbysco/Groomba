@@ -8,8 +8,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
@@ -24,14 +24,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import javax.annotation.Nullable;
 import java.util.Optional;
-import java.util.UUID;
 
 public class Groomba extends PathfinderMob {
-	protected static final EntityDataAccessor<Optional<UUID>> OWNER_UNIQUE_ID = SynchedEntityData.defineId(Groomba.class, EntityDataSerializers.OPTIONAL_UUID);
+	protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> OWNER_REFERENCE = SynchedEntityData.defineId(Groomba.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
 
 	public Groomba(EntityType<? extends PathfinderMob> type, Level level) {
 		super(type, level);
@@ -40,7 +38,7 @@ public class Groomba extends PathfinderMob {
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
-		builder.define(OWNER_UNIQUE_ID, Optional.empty());
+		builder.define(OWNER_REFERENCE, Optional.empty());
 	}
 
 	@Override
@@ -56,30 +54,25 @@ public class Groomba extends PathfinderMob {
 	}
 
 	@Nullable
-	public UUID getOwnerId() {
-		return this.entityData.get(OWNER_UNIQUE_ID).orElse((UUID) null);
+	public EntityReference<LivingEntity> getOwnerReference() {
+		return (EntityReference) ((Optional) this.entityData.get(OWNER_REFERENCE)).orElse((Object) null);
 	}
 
-	public void setOwnerId(@Nullable UUID uuid) {
-		this.entityData.set(OWNER_UNIQUE_ID, Optional.ofNullable(uuid));
+	public void setOwner(@Nullable LivingEntity owner) {
+		this.entityData.set(OWNER_REFERENCE, Optional.ofNullable(owner).map(EntityReference::new));
 	}
 
-	@Nullable
-	public LivingEntity getOwner() {
-		try {
-			UUID uuid = this.getOwnerId();
-			return uuid == null ? null : this.level().getPlayerByUUID(uuid);
-		} catch (IllegalArgumentException illegalargumentexception) {
-			return null;
-		}
+	public void setOwnerReference(@Nullable EntityReference<LivingEntity> owner) {
+		this.entityData.set(OWNER_REFERENCE, Optional.ofNullable(owner));
 	}
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 
-		if (this.getOwnerId() != null) {
-			compound.putUUID("Owner", this.getOwnerId());
+		EntityReference<LivingEntity> entityreference = this.getOwnerReference();
+		if (entityreference != null) {
+			entityreference.store(compound, "Owner");
 		}
 	}
 
@@ -87,22 +80,12 @@ public class Groomba extends PathfinderMob {
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 
-		UUID uuid;
-		if (compound.hasUUID("Owner")) {
-			uuid = compound.getUUID("Owner");
+		EntityReference<LivingEntity> entityreference = EntityReference.readWithOldOwnerConversion(compound, "Owner", this.level());
+		if (entityreference != null) {
+			this.entityData.set(OWNER_REFERENCE, Optional.of(entityreference));
 		} else {
-			String s = compound.getString("Owner");
-			uuid = OldUsersConverter.convertMobOwnerIfNecessary(this.getServer(), s);
+			this.entityData.set(OWNER_REFERENCE, Optional.empty());
 		}
-
-		if (uuid != null) {
-			this.setOwnerId(uuid);
-		}
-	}
-
-	@Override
-	public Iterable<ItemStack> getArmorSlots() {
-		return new ArrayList<>();
 	}
 
 	@Override
