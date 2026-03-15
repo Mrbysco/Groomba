@@ -3,7 +3,7 @@ package com.mrbysco.groomba;
 import com.mojang.logging.LogUtils;
 import com.mrbysco.groomba.client.ClientHandler;
 import com.mrbysco.groomba.registry.GroombaRegistry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -19,7 +19,7 @@ public class GroombaMod {
 	public static final String MOD_ID = "groomba";
 	private static final Logger LOGGER = LogUtils.getLogger();
 
-	public static TagKey<Block> CUTTABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(MOD_ID, "cuttable"));
+	public static TagKey<Block> CUTTABLE = BlockTags.create(modLoc("cuttable"));
 
 	public GroombaMod(IEventBus eventBus, Dist dist) {
 		GroombaRegistry.ITEMS.register(eventBus);
@@ -39,5 +39,9 @@ public class GroombaMod {
 		if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 			event.accept(GroombaRegistry.GROOMBA_ITEM);
 		}
+	}
+
+	public static Identifier modLoc(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

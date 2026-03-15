@@ -7,10 +7,10 @@ import com.mrbysco.groomba.client.state.GroombaRenderState;
 import com.mrbysco.groomba.entity.Groomba;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class GroombaRenderer extends MobRenderer<Groomba, GroombaRenderState, GroombaModel> {
-	private static final ResourceLocation PADORU_TEXTURES = ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "textures/entity/groomba.png");
+	private static final Identifier PADORU_TEXTURES = GroombaMod.modLoc("textures/entity/groomba.png");
 
 	public GroombaRenderer(EntityRendererProvider.Context context) {
 		super(context, new GroombaModel(context.bakeLayer(ClientHandler.GROOMBA)), 0.5F);
@@ -28,7 +28,7 @@ public class GroombaRenderer extends MobRenderer<Groomba, GroombaRenderState, Gr
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(GroombaRenderState renderState) {
+	public Identifier getTextureLocation(GroombaRenderState renderState) {
 		return PADORU_TEXTURES;
 	}
 }

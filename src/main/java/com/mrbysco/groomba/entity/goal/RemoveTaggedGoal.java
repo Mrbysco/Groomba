@@ -75,7 +75,7 @@ public class RemoveTaggedGoal extends MoveInsideBlockGoal {
 			if (this.ticksSinceReachedGoal > 0) {
 				Vec3 vec3 = this.removerMob.getDeltaMovement();
 				this.removerMob.setDeltaMovement(vec3.x, 0.15D, vec3.z);
-				if (!level.isClientSide) {
+				if (!level.isClientSide()) {
 					double d0 = 0.08D;
 					((ServerLevel) level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.BAMBOO)),
 							(double) blockPos.getX() + 0.5D, (double) blockPos.getY() + 0.7D, (double) blockPos.getZ() + 0.5D, 3,
@@ -95,7 +95,7 @@ public class RemoveTaggedGoal extends MoveInsideBlockGoal {
 
 			if (this.ticksSinceReachedGoal > 60) {
 				level.removeBlock(blockPos, false);
-				if (!level.isClientSide) {
+				if (!level.isClientSide()) {
 					for (int i = 0; i < 20; ++i) {
 						double d3 = randomsource.nextGaussian() * 0.02D;
 						double d1 = randomsource.nextGaussian() * 0.02D;

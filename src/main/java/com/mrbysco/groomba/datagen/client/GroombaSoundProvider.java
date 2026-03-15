@@ -3,7 +3,7 @@ package com.mrbysco.groomba.datagen.client;
 import com.mrbysco.groomba.GroombaMod;
 import com.mrbysco.groomba.registry.GroombaRegistry;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class GroombaSoundProvider extends SoundDefinitionsProvider {
@@ -19,11 +19,11 @@ public class GroombaSoundProvider extends SoundDefinitionsProvider {
 				.with(sound(modLoc("cutting"))));
 	}
 
-	private String modSubtitle(ResourceLocation id) {
+	private String modSubtitle(Identifier id) {
 		return GroombaMod.MOD_ID + ".subtitle." + id.getPath();
 	}
 
-	private ResourceLocation modLoc(String name) {
-		return ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, name);
+	private Identifier modLoc(String name) {
+		return GroombaMod.modLoc(name);
 	}
 }

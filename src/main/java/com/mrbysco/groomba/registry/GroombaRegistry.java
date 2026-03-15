@@ -4,7 +4,7 @@ import com.mrbysco.groomba.GroombaMod;
 import com.mrbysco.groomba.entity.Groomba;
 import com.mrbysco.groomba.item.GroombaItem;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -29,10 +29,10 @@ public class GroombaRegistry {
 	);
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> GROOMBA_CUTTING = SOUND_EVENTS.register("groomba.cutting", () ->
-			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "groomba.cutting")));
+			SoundEvent.createVariableRangeEvent(GroombaMod.modLoc("groomba.cutting")));
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> GROOMBA_CUTTING2 = SOUND_EVENTS.register("groomba.cutting2", () ->
-			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GroombaMod.MOD_ID, "groomba.cutting2")));
+			SoundEvent.createVariableRangeEvent(GroombaMod.modLoc("groomba.cutting2")));
 
 	public static final DeferredItem<GroombaItem> GROOMBA_ITEM = ITEMS.registerItem("groomba", GroombaItem::new);
 

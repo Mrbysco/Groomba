@@ -14,6 +14,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -29,8 +30,8 @@ import net.minecraft.world.level.storage.ValueOutput;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class Groomba extends PathfinderMob {
-	protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> OWNER_REFERENCE = SynchedEntityData.defineId(Groomba.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+public class Groomba extends PathfinderMob implements OwnableEntity {
+	protected static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(Groomba.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
 
 	public Groomba(EntityType<? extends PathfinderMob> type, Level level) {
 		super(type, level);
@@ -39,7 +40,7 @@ public class Groomba extends PathfinderMob {
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
-		builder.define(OWNER_REFERENCE, Optional.empty());
+		builder.define(DATA_OWNERUUID_ID, Optional.empty());
 	}
 
 	@Override
@@ -56,15 +57,15 @@ public class Groomba extends PathfinderMob {
 
 	@Nullable
 	public EntityReference<LivingEntity> getOwnerReference() {
-		return (EntityReference) ((Optional) this.entityData.get(OWNER_REFERENCE)).orElse((Object) null);
+		return this.entityData.get(DATA_OWNERUUID_ID).orElse(null);
 	}
 
 	public void setOwner(@Nullable LivingEntity owner) {
-		this.entityData.set(OWNER_REFERENCE, Optional.ofNullable(owner).map(EntityReference::new));
+		this.entityData.set(DATA_OWNERUUID_ID, Optional.ofNullable(owner).map(EntityReference::of));
 	}
 
 	public void setOwnerReference(@Nullable EntityReference<LivingEntity> owner) {
-		this.entityData.set(OWNER_REFERENCE, Optional.ofNullable(owner));
+		this.entityData.set(DATA_OWNERUUID_ID, Optional.ofNullable(owner));
 	}
 
 	@Override
@@ -83,9 +84,9 @@ public class Groomba extends PathfinderMob {
 
 		EntityReference<LivingEntity> entityreference = EntityReference.readWithOldOwnerConversion(input, "Owner", this.level());
 		if (entityreference != null) {
-			this.entityData.set(OWNER_REFERENCE, Optional.of(entityreference));
+			this.entityData.set(DATA_OWNERUUID_ID, Optional.of(entityreference));
 		} else {
-			this.entityData.set(OWNER_REFERENCE, Optional.empty());
+			this.entityData.set(DATA_OWNERUUID_ID, Optional.empty());
 		}
 	}
 
