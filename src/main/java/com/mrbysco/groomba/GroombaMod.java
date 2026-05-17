@@ -1,14 +1,12 @@
 package com.mrbysco.groomba;
 
 import com.mojang.logging.LogUtils;
-import com.mrbysco.groomba.client.ClientHandler;
 import com.mrbysco.groomba.registry.GroombaRegistry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -21,18 +19,13 @@ public class GroombaMod {
 
 	public static TagKey<Block> CUTTABLE = BlockTags.create(modLoc("cuttable"));
 
-	public GroombaMod(IEventBus eventBus, Dist dist) {
+	public GroombaMod(IEventBus eventBus) {
 		GroombaRegistry.ITEMS.register(eventBus);
 		GroombaRegistry.ENTITIES.register(eventBus);
 		GroombaRegistry.SOUND_EVENTS.register(eventBus);
 
 		eventBus.addListener(GroombaRegistry::registerEntityAttributes);
 		eventBus.addListener(this::addTabContents);
-
-		if (dist.isClient()) {
-			eventBus.addListener(ClientHandler::registerEntityRenders);
-			eventBus.addListener(ClientHandler::registerLayerDefinitions);
-		}
 	}
 
 	private void addTabContents(final BuildCreativeModeTabContentsEvent event) {

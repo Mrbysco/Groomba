@@ -9,7 +9,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -77,7 +77,7 @@ public class RemoveTaggedGoal extends MoveInsideBlockGoal {
 				this.removerMob.setDeltaMovement(vec3.x, 0.15D, vec3.z);
 				if (!level.isClientSide()) {
 					double d0 = 0.08D;
-					((ServerLevel) level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.BAMBOO)),
+					((ServerLevel) level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStackTemplate(Items.BAMBOO)),
 							(double) blockPos.getX() + 0.5D, (double) blockPos.getY() + 0.7D, (double) blockPos.getZ() + 0.5D, 3,
 							((double) randomsource.nextFloat() - 0.5D) * d0,
 							((double) randomsource.nextFloat() - 0.5D) * d0,

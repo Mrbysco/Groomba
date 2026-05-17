@@ -4,7 +4,6 @@ import com.mrbysco.groomba.GroombaMod;
 import com.mrbysco.groomba.entity.Groomba;
 import com.mrbysco.groomba.item.GroombaItem;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
